@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>lio_common</name>
+  <version>0.1.0</version>
+  <description>ROS-free common time and trajectory utilities for LiDAR odometry packages.</description>
+  <maintainer email="jhuai@example.com">jhuai</maintainer>
+  <license>TODO</license>
+
+  <buildtool_depend>cmake</buildtool_depend>
+  <build_depend>eigen</build_depend>
+  <build_export_depend>eigen</build_export_depend>
+  <exec_depend>eigen</exec_depend>
+
+  <export>
+    <build_type>cmake</build_type>
+  </export>
+</package>
