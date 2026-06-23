@@ -11,6 +11,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 find_package(Eigen3 REQUIRED)
 
 add_library(lio_common src/common.cpp)
+set_target_properties(lio_common PROPERTIES POSITION_INDEPENDENT_CODE ON)
 add_library(lio_common::lio_common ALIAS lio_common)
 
 target_compile_features(lio_common PUBLIC cxx_std_17)
