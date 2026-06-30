@@ -260,11 +260,19 @@ std::pair<uint32_t, uint32_t> parseTime(const std::string& time) {
   size_t pad = 0;
   size_t pow = 1;
   if (pos == std::string::npos) {
-    pos = time.length() - 9;
-    pos1 = pos;
+    if (time.length() <= 9) {
+      pos = 0;
+      pos1 = 0;
+      pad = 9 - time.length();
+      pow = power10[pad];
+    } else {
+      pos = time.length() - 9;
+      pos1 = pos;
+    }
   } else {
     pos1 = pos + 1;
-    pad = 9 - (time.length() - pos1);
+    const size_t decimals = time.length() - pos1;
+    pad = (decimals < 9) ? (9 - decimals) : 0;
     pow = power10[pad];
   }
   std::string trunk = time.substr(0, pos);
@@ -274,6 +282,9 @@ std::pair<uint32_t, uint32_t> parseTime(const std::string& time) {
   ss1 >> sec;
 
   std::string residuals = time.substr(pos1);
+  if (residuals.length() > 9) {
+    residuals = residuals.substr(0, 9);
+  }
   std::istringstream ss2(residuals);
   ss2 >> nsec;
   nsec *= pow;
